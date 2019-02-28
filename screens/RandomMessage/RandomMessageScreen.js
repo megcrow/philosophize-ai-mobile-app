@@ -1,13 +1,27 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'native-base';
+
+
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
 
 export default class StarredMessagesScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <PhilosophizeAILogo />
-        <Text style={styles.text}>I am the random message screen!</Text>
+        <View style={styles.position}>
+          <PhilosophizeAILogo />
+          <View style={styles.messageContainer}>
+            <Text style = {styles.message}>
+              Randomly generated message
+            </Text>
+          </View>
+          <Button block success>
+            <Text style={{color: 'white'}}>
+              Generate Message
+            </Text>
+          </Button>
+        </View>
       </View>
     );
   }
@@ -17,10 +31,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#282c34',
   },
-  text: {
-    color: '#fff'
+
+  position: {
+    marginTop: 107,
+    alignItems: 'center',
+  },
+
+  messageContainer: {
+    alignItems: 'center',
+    marginTop: 100,
+    marginBottom: 25,
+    padding: 20,
+    borderRadius: 20,
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    overflow: 'hidden',
+    width: 300
+  },
+
+  message: {
+    fontFamily: 'Menlo',
+    color: 'white'
   }
 });

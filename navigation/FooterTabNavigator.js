@@ -12,7 +12,7 @@ const FooterTabNavigator = () => {
       key="tabbar"
       tabs = {true}
       >
-        <Scene key="randomMessages" title="Random Messages">
+        <Scene key="randomMessage" title="Random Message">
           <Scene
           key="randomMessageScreen"
           component={RandomMessageScreen}
