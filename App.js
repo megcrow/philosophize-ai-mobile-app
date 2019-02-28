@@ -1,14 +1,26 @@
 import React from 'react';
-import {  StyleSheet, View } from 'react-native';
+import {  StatusBar, StyleSheet, View } from 'react-native';
 
-import AppNavigator from './navigation/AppNavigator';
+import FooterTabNavigator from './navigation/FooterTabNavigator';
 
 export default class App extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  loadAssetsAsync = async () => {
+    await Font.loadAsync({
+      'FontAwesome': require('./assets/fonts/fontawesome.ttf')
+    })
+  }
+  componentDidMount() {
+    this.loadAssetsAsync()
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <AppNavigator />
+        <StatusBar barStyle="light-content"/>
+        <FooterTabNavigator />
       </View>
     );
   }
@@ -17,6 +29,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
 });

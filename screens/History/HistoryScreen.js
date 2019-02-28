@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
 
-export default class StarredMessagesScreen extends React.Component {
+export default class HistoryScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>I am the starred messages screen!</Text>
+        <PhilosophizeAILogo />
+        <Text style={styles.text}>I am the history screen!</Text>
       </View>
     );
   }
@@ -16,5 +18,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#282c34',
   },
+  text: {
+    color: '#fff'
+  }
 });
