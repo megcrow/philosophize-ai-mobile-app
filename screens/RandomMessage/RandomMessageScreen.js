@@ -5,18 +5,19 @@ import { Button } from 'native-base';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
 
-export default class StarredMessagesScreen extends React.Component {
-  render() {
+export default RandomMessageScreen = ({ message, loadMessage }) => {
     return (
       <View style={styles.container}>
         <View style={styles.position}>
           <PhilosophizeAILogo />
           <View style={styles.messageContainer}>
             <Text style = {styles.message}>
-              Randomly generated message
+              {message.text}
             </Text>
           </View>
-          <Button block success>
+          <Button block success
+          onPress={loadMessage}
+          >
             <Text style={{color: 'white'}}>
               Generate Message
             </Text>
@@ -24,7 +25,6 @@ export default class StarredMessagesScreen extends React.Component {
         </View>
       </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({
