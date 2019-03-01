@@ -8,7 +8,7 @@ import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
 export default RandomMessageScreen = ({ message, loadMessage }) => {
     return (
       <View style={styles.container}>
-        <View style={styles.position}>
+        <View>
           <PhilosophizeAILogo />
           <View style={styles.messageContainer}>
             <Text style = {styles.message}>
@@ -34,11 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#282c34',
   },
 
-  position: {
-    marginTop: 107,
-    alignItems: 'center',
-  },
-
   messageContainer: {
     alignItems: 'center',
     marginTop: 100,
@@ -48,7 +43,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, 0.5)',
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     overflow: 'hidden',
-    width: 300
+    width: 350
   },
 
   message: {

@@ -1,20 +1,28 @@
 import React from 'react'
 import FontAwesome, { Icons } from 'react-native-fontawesome';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 
 const PhilosophizeAILogo = () => {
   return (
-    <Text style={styles.header}>
-      philosophize.ai
-      &nbsp;
-      <FontAwesome style={styles.icon}>
-        {Icons.undo}
-      </FontAwesome>
-    </Text>
+    <View style={styles.position}>
+      <Text style={styles.header}>
+        philosophize.ai
+        &nbsp;
+        <FontAwesome style={styles.icon}>
+          {Icons.undo}
+        </FontAwesome>
+      </Text>
+    </View>
   );
 }
 const styles = StyleSheet.create({
+
+  position: {
+    marginTop: 107,
+    alignItems: 'center',
+  },
+
   header: {
     color: 'white',
     fontSize : 38,

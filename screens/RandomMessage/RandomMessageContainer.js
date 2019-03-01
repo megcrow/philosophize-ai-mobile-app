@@ -17,7 +17,7 @@ api.use(async (response) => {
 const enhance = compose(
   withState('message', 'setMessage', {
     loading: false,
-    text: 'hello',
+    text: 'Press the generate message button to see a random message',
   }),
 
   withHandlers({
@@ -25,7 +25,6 @@ const enhance = compose(
         try {
           setMessage({loading:true});
           const response = await api.post('messages');
-          console.log(response.data.body);
           setMessage({loading: false, text: response.data.body});
 
         } catch(e) {
