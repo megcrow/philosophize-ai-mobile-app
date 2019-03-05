@@ -7,22 +7,33 @@ const enhance = compose(
   withState('generatedMessages', 'setGeneratedMessages', []),
   withState('isLoadingMessages', 'setIsLoadingMessages', false),
 
+  // withStateHandlers(
+  //   initialState: Object | (props: Object) => any,
+  //   stateUpdaters: {
+  //     [key: string]: (state:Object, props:Object) => (...payload: any[]) => Object
+  //   }
+  // )
+
   withHandlers({
 
-    loadMessages: ({ generatedMessages, setGeneratedMessages, setIsLoadingMessages, isLoadingMessages }) => async () => {
-      console.log('loadMessages has been called');
+    loadMessages: ({ setGeneratedMessages, setIsLoadingMessages }) => async () => {
       try {
         setIsLoadingMessages(true);
         const response = await api.get('messages');
         setGeneratedMessages(response.data);
-        console.log('response.data[0] is:', response.data[0])
-        console.log('response.data[0].body is:', response.data[0].body)
         setIsLoadingMessages(false)
       } catch(e) {
         setIsLoadingMessages(false);
         console.error(e);
       }
     },
+  }),
+
+  withHandlers({
+    refreshMessages: ({setGeneratedMessages, setIsLoadingMessages, loadMessages}) => () => {
+      setGeneratedMessages([]);
+      loadMessages();
+  }
   }),
 
   lifecycle({
