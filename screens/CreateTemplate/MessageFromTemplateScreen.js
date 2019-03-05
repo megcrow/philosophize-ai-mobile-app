@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
-import { Actions } from 'react-native-router-flux';
 
 export default class CreateTemplateScreen extends React.Component {
   render() {
@@ -11,37 +10,23 @@ export default class CreateTemplateScreen extends React.Component {
       <View style={styles.container}>
         <View>
           <PhilosophizeAILogo />
-          <View style={styles.templateBuilder}>
-            <Text style={styles.templateBuilderText}>
-              Create your own using:
-            </Text>
-            <View style={styles.templateButtons}>
-              <Button light>
-                <Text style={styles.templateButtonText}>noun</Text>
-              </Button>
-              <Button light>
-                <Text style={styles.templateButtonText}>a_noun</Text>
-              </Button>
-              <Button light>
-                <Text style={styles.templateButtonText}>adjective</Text>
-              </Button>
-              <Button light>
-                <Text style={styles.templateButtonText}>an_adjective</Text>
-              </Button>
-            </View>
-          </View>
           <View style={styles.templateContainer}>
             <Text style = {styles.template}>
               I am a template!
             </Text>
           </View>
-          <Button block success
-          onPress={()=>Actions.messageFromTemplateScreen()}
-          >
+          <Button block success>
             <Text style={{color: 'white'}}>
               Generate From Template
             </Text>
           </Button>
+          <View style={{paddingTop: 30}}>
+            <Button block success>
+              <Text style={{color: 'white'}}>
+                Make New Template
+              </Text>
+            </Button>
+          </View>
         </View>
       </View>
     );

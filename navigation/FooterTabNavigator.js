@@ -3,8 +3,9 @@ import { Router, Scene } from 'react-native-router-flux';
 
 import RandomMessageContainer from '../screens/RandomMessage/RandomMessageContainer';
 import CreateTemplateScreen from '../screens/CreateTemplate/CreateTemplateScreen';
-import HistoryScreenContainer from '../screens/History/HistoryScreen';
-import TabBarIcon from '../components/TabBarIcon'
+import MessageFromTemplateScreen from '../screens/CreateTemplate/MessageFromTemplateScreen';
+import HistoryScreenContainer from '../screens/History/HistoryScreenContainer';
+
 
 const FooterTabNavigator = () => {
   return (
@@ -32,6 +33,11 @@ const FooterTabNavigator = () => {
           <Scene
           key="createTemplateScreen"
           component={CreateTemplateScreen}
+          hideNavBar={true}
+          />
+          <Scene
+          key="messageFromTemplateScreen"
+          component={MessageFromTemplateScreen}
           hideNavBar={true}
           />
         </Scene>
