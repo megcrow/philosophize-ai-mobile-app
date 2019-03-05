@@ -11,12 +11,16 @@ export default function HistoryScreen ({ loadMessages, isLoadingMessages, genera
     >
       <PhilosophizeAILogo />
       {
-        isLoadingMessages ? (
+        (isLoadingMessages || generatedMessages.length === 0) ? (
           <Text style={styles.text}>
             loading...
           </Text>
         ) : (
-          console.log('generatedMessages[0] is:', generatedMessages[0])
+          <FlatList
+            data={generatedMessages}
+            renderItem={({ item })=> <Text style={styles.text}>{item.body}</Text>}
+          >
+          </FlatList>
 
         )
       }
@@ -34,9 +38,3 @@ const styles = StyleSheet.create({
     color: '#fff'
   }
 });
-
-{/* <FlatList
-data={generatedMessages}
-renderItem={({message})=> <Text style={styles.text}>{message}</Text>}
->
-</FlatList> */}
