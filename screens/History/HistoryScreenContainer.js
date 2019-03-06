@@ -7,15 +7,7 @@ const enhance = compose(
   withState('generatedMessages', 'setGeneratedMessages', []),
   withState('isLoadingMessages', 'setIsLoadingMessages', false),
 
-  // withStateHandlers(
-  //   initialState: Object | (props: Object) => any,
-  //   stateUpdaters: {
-  //     [key: string]: (state:Object, props:Object) => (...payload: any[]) => Object
-  //   }
-  // )
-
   withHandlers({
-
     loadMessages: ({ setGeneratedMessages, setIsLoadingMessages }) => async () => {
       try {
         setIsLoadingMessages(true);

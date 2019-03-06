@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Scene } from 'react-native-router-flux';
 
-import RandomMessageContainer from '../screens/RandomMessage/RandomMessageContainer';
+import RandomMessageScreen from '../screens/RandomMessage/RandomMessageScreen';
 import CreateTemplateScreen from '../screens/CreateTemplate/CreateTemplateScreen';
 import MessageFromTemplateScreen from '../screens/CreateTemplate/MessageFromTemplateScreen';
 import HistoryScreenContainer from '../screens/History/HistoryScreenContainer';
@@ -18,7 +18,7 @@ const FooterTabNavigator = () => {
         <Scene key="randomMessage" title="Random Message">
           <Scene
           key="randomMessageScreen"
-          component={RandomMessageContainer}
+          component={RandomMessageScreen}
           hideNavBar={true}
           />
         </Scene>

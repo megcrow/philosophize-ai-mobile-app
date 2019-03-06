@@ -1,27 +1,38 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
 
-export default class CreateTemplateScreen extends React.Component {
-  render() {
+const MessageFromTemplateScreen = ({isMessageLoading, loadMessage, message, templateId}) => {
+  console.log('MessageFromTemplateScreen', templateId, message)
     return (
       <View style={styles.container}>
         <View>
           <PhilosophizeAILogo />
           <View style={styles.templateContainer}>
-            <Text style = {styles.template}>
-              I am a template!
-            </Text>
+              {
+                (isMessageLoading) ? (
+                <Text style={styles.template}>
+                  loading....
+                </Text>
+                ) : (
+                <Text style={styles.template}>{message}</Text>
+                )
+              }
           </View>
-          <Button block success>
-            <Text style={{color: 'white'}}>
-              Generate From Template
+          <Button block success onPress={loadMessage}>
+            <Text
+              style={{color: 'white'}}
+            >
+              Generate from Template
             </Text>
           </Button>
           <View style={{paddingTop: 30}}>
-            <Button block success>
+            <Button block success
+              onPress={()=> Actions.reset('createTemplateScreen')}
+            >
               <Text style={{color: 'white'}}>
                 Make New Template
               </Text>
@@ -30,7 +41,6 @@ export default class CreateTemplateScreen extends React.Component {
         </View>
       </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({
@@ -83,3 +93,6 @@ const styles = StyleSheet.create({
   }
 
 });
+
+// export default withTemplate(MessageFromTemplateScreen);
+export default MessageFromTemplateScreen;

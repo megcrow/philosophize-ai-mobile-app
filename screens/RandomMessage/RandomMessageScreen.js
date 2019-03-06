@@ -4,15 +4,16 @@ import { Button } from 'native-base';
 
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
+import withTemplate from '../../helpers/withTemplate';
 
-export default RandomMessageScreen = ({ message, loadMessage }) => {
+const RandomMessageScreen = ({ message, loadMessage }) => {
     return (
       <View style={styles.container}>
         <View>
           <PhilosophizeAILogo />
           <View style={styles.messageContainer}>
             <Text style = {styles.message}>
-              {message.text}
+              {message}
             </Text>
           </View>
           <Button block success
@@ -51,3 +52,5 @@ const styles = StyleSheet.create({
     color: 'white'
   }
 });
+
+export default withTemplate(RandomMessageScreen);

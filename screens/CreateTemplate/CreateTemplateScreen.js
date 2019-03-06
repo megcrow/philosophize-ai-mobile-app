@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { Button } from 'native-base';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
-import { Actions } from 'react-native-router-flux';
+import withTemplate from '../../helpers/withTemplate';
 
-export default class CreateTemplateScreen extends React.Component {
-  render() {
+const CreateTemplateScreen = ({ message, template, submitTemplate }) => {
     return (
       <View style={styles.container}>
         <View>
@@ -31,12 +30,15 @@ export default class CreateTemplateScreen extends React.Component {
             </View>
           </View>
           <View style={styles.templateContainer}>
-            <Text style = {styles.template}>
-              I am a template!
-            </Text>
+            <TextInput
+              style = {styles.templateText}
+              value={template}
+              multiline={true}
+            >
+            </TextInput>
           </View>
           <Button block success
-          onPress={()=>Actions.messageFromTemplateScreen()}
+            onPress={submitTemplate}
           >
             <Text style={{color: 'white'}}>
               Generate From Template
@@ -45,7 +47,6 @@ export default class CreateTemplateScreen extends React.Component {
         </View>
       </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({
@@ -92,9 +93,11 @@ const styles = StyleSheet.create({
     width: 350
   },
 
-  template: {
+  templateText: {
     fontFamily: 'Menlo',
     color: '#8f8f8f'
   }
 
 });
+
+export default withTemplate(CreateTemplateScreen);
