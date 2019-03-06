@@ -20,7 +20,7 @@ export default compose(
     setTemplateId: ({ templateId }) => (payload) => ({ templateId: payload || templateId }),
   }),
   withHandlers({
-    loadMessage: ({ setMessage, setIsMessageLoading, templateId }) => () => {
+    loadMessage: ({ setMessage, setIsMessageLoading, templateId, message, loadMessage }) => () => {
       console.log('loadMessage was called')
       setIsMessageLoading(true);
       if(templateId === null ){
@@ -62,7 +62,7 @@ export default compose(
           setIsTemplateLoading(false)
           setTemplateId(resp.data.id)
           console.log('created template!', resp.data)
-          Actions.push('messageFromTemplateScreen', { templateId: resp.data.id, message, loadMessage });
+          // loadMessage();
         })
         .catch(e => {
           setIsTemplateLoading(false);
@@ -70,8 +70,21 @@ export default compose(
         })
     }
   }),
-  // withPropsOnChange(['template'], ({ loadMessage }) => {
-  //     loadMessage()
-  // }),
+
+  withHandlers({
+    submitAndLoad: ({ submitTemplate, loadMessage }) => () => {
+      console.log('submit and load was called!')
+      submitTemplate();
+      loadMessage();
+    }
+  }),
+  withPropsOnChange(['message', 'templateId'], ({ message, templateId, loadMessage }) => {
+    if(message !== 'Press the generate message button to see a random message' && Actions.currentScene !== 'randomMessageScreen') {
+      Actions.replace('messageFromTemplateScreen', { templateId, message, loadMessage });
+    } else {
+        console.log('welp')}
+    }
+  ),
 
 )
+

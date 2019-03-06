@@ -31,7 +31,7 @@ const MessageFromTemplateScreen = ({isMessageLoading, loadMessage, message, temp
           </Button>
           <View style={{paddingTop: 30}}>
             <Button block success
-              onPress={()=> Actions.reset('createTemplateScreen')}
+              onPress={()=> Actions.createTemplateScreen()}
             >
               <Text style={{color: 'white'}}>
                 Make New Template
