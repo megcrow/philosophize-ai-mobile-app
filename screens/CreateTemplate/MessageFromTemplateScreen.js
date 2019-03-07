@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
-import { Actions } from 'react-native-router-flux';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
+import withData from '../../helpers/withData';
 
-const MessageFromTemplateScreen = ({isMessageLoading, loadMessage, message, templateId, navigation}) => {
-  console.log('MessageFromTemplateScreen', templateId, message)
+const MessageFromTemplateScreen = (props) => {
+  const {isMessageLoading, loadMessage, message, templateId, navigation} = props
+  console.log('MessageFromTemplateScreen', props)
     return (
       <View style={styles.container}>
         <View>
@@ -49,35 +50,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#282c34',
   },
-  templateBuilder: {
-    marginTop: 70,
-    backgroundColor: '#17a2b8',
-    width: 350,
-    height: 100,
-    borderRadius: 10
-  },
-
-  templateBuilderText: {
-    color:'#fff',
-    fontSize:20,
-    textAlign: 'center',
-    marginTop: 10
-  },
-
-  templateButtons: {
-    flexDirection:'row',
-    justifyContent: 'space-evenly',
-    marginTop: 10
-  },
-
-  templateButtonText: {
-    fontSize: 12,
-    padding: 5
-  },
 
   templateContainer: {
     alignItems: 'center',
-    marginTop: 25,
+    marginTop: 70,
     marginBottom: 25,
     padding: 20,
     borderRadius: 20,
@@ -95,4 +71,4 @@ const styles = StyleSheet.create({
 });
 
 // export default withTemplate(MessageFromTemplateScreen);
-export default MessageFromTemplateScreen;
+export default withData(MessageFromTemplateScreen);

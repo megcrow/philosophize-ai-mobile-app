@@ -4,7 +4,7 @@ import { Button } from 'native-base';
 
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
-import withTemplate from '../../helpers/withTemplate';
+import withData from '../../helpers/withData';
 
 const RandomMessageScreen = ({ message, loadMessage }) => {
     return (
@@ -53,4 +53,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withTemplate(RandomMessageScreen);
+export default withData(RandomMessageScreen);
+

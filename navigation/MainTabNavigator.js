@@ -23,21 +23,21 @@ HistoryStack.navigationOptions = {
   tabBarLabel: 'History',
 };
 
-const CreateTemplateStack = createStackNavigator(
+const TemplateScreensStack = createStackNavigator(
   {
-    CreateTemplate: CreateTemplateScreen,
-    MessageFromTemplate: MessageFromTemplateScreen
+  CreateTemplate: CreateTemplateScreen,
+  MessageFromTemplate: MessageFromTemplateScreen
   },
   { headerMode: 'none' },
   { initialRouteName: 'CreateTemplate' },
-  );
+);
 
-CreateTemplateStack.navigationOptions = {
+TemplateScreensStack.navigationOptions = {
   tabBarLabel: 'Create Template',
 };
 
 export default createBottomTabNavigator({
   RandomMessageStack,
   HistoryStack,
-  CreateTemplateStack,
+  TemplateScreensStack,
 });

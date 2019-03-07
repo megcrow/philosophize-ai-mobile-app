@@ -5,7 +5,6 @@ import RandomMessageScreen from '../screens/RandomMessage/RandomMessageScreen';
 import CreateTemplateScreen from '../screens/CreateTemplate/CreateTemplateScreen';
 import MessageFromTemplateScreen from '../screens/CreateTemplate/MessageFromTemplateScreen';
 import HistoryScreenContainer from '../screens/History/HistoryScreenContainer';
-import CreateTemplateContainer from '../screens/CreateTemplate/CreateTemplateScreenContainer';
 
 
 const FooterTabNavigator = () => {

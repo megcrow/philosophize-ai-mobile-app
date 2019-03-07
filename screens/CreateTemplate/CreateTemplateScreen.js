@@ -3,9 +3,9 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { Button } from 'native-base';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
-import withTemplate from '../../helpers/withTemplate';
+import withData from '../../helpers/withData';
 
-const CreateTemplateScreen = ({ submitAndLoad, template, submitTemplate }) => {
+const CreateTemplateScreen = ({ submitTemplate, template }) => {
     return (
       <View style={styles.container}>
         <View>
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default withTemplate(CreateTemplateScreen);
+export default withData(CreateTemplateScreen);
