@@ -5,7 +5,7 @@ import { Button } from 'native-base';
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
 import withTemplate from '../../helpers/withTemplate';
 
-const CreateTemplateScreen = ({ submitAndLoad, template }) => {
+const CreateTemplateScreen = ({ submitAndLoad, template, submitTemplate }) => {
     return (
       <View style={styles.container}>
         <View>
@@ -38,7 +38,7 @@ const CreateTemplateScreen = ({ submitAndLoad, template }) => {
             </TextInput>
           </View>
           <Button block success
-            onPress={submitAndLoad}
+            onPress={submitTemplate}
           >
             <Text style={{color: 'white'}}>
               Generate From Template

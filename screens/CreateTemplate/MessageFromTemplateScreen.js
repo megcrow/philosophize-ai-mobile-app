@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
 
-const MessageFromTemplateScreen = ({isMessageLoading, loadMessage, message, templateId}) => {
+const MessageFromTemplateScreen = ({isMessageLoading, loadMessage, message, templateId, navigation}) => {
   console.log('MessageFromTemplateScreen', templateId, message)
     return (
       <View style={styles.container}>
@@ -31,7 +31,7 @@ const MessageFromTemplateScreen = ({isMessageLoading, loadMessage, message, temp
           </Button>
           <View style={{paddingTop: 30}}>
             <Button block success
-              onPress={()=> Actions.createTemplateScreen()}
+              onPress={()=> navigation.navigate('CreateTemplate')}
             >
               <Text style={{color: 'white'}}>
                 Make New Template

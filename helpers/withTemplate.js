@@ -54,7 +54,7 @@ export default compose(
   }),
 
   withHandlers({
-    submitTemplate: ({ setIsTemplateLoading, template, setTemplateId, loadMessage, message }) => () => {
+    submitTemplate: ({ setIsTemplateLoading, template, templateId, setTemplateId, loadMessage, message, navigation, isMessageLoading }) => () => {
       console.log('submitTemplate was called')
       setIsTemplateLoading(true);
       api.post('templates', {body: template})
@@ -62,29 +62,31 @@ export default compose(
           setIsTemplateLoading(false)
           setTemplateId(resp.data.id)
           console.log('created template!', resp.data)
-          // loadMessage();
+          loadMessage();
         })
         .catch(e => {
           setIsTemplateLoading(false);
           console.error(e)
         })
+      navigation.navigate('MessageFromTemplate', {isMessageLoading, loadMessage, message, templateId})
     }
   }),
 
   withHandlers({
-    submitAndLoad: ({ submitTemplate, loadMessage }) => () => {
+    submitAndLoad: ({ submitTemplate, loadMessage, navigation, isMessageLoading, message, templateId }) => () => {
       console.log('submit and load was called!')
       submitTemplate();
       loadMessage();
+      navigation.navigate('MessageFromTemplate', {isMessageLoading, loadMessage, message, templateId})
     }
   }),
-  withPropsOnChange(['message', 'templateId'], ({ message, templateId, loadMessage }) => {
-    if(message !== 'Press the generate message button to see a random message' && Actions.currentScene !== 'randomMessageScreen') {
-      Actions.replace('messageFromTemplateScreen', { templateId, message, loadMessage });
-    } else {
-        console.log('welp')}
-    }
-  ),
+  // withPropsOnChange(['message', 'templateId'], ({ message, templateId, loadMessage }) => {
+  //   if(message !== 'Press the generate message button to see a random message' && Actions.currentScene !== 'randomMessageScreen') {
+  //     Actions.replace('messageFromTemplateScreen', { templateId, message, loadMessage });
+  //   } else {
+  //       console.log('welp')}
+  //   }
+  // ),
 
 )
 
