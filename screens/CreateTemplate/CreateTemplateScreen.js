@@ -1,50 +1,61 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
 import { Button } from 'native-base';
+import { compose, withPropsOnChange} from 'recompose';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
-import withData from '../../helpers/withData';
 
-const CreateTemplateScreen = ({ submitTemplate, template }) => {
+
+const enhance = compose(
+  withPropsOnChange(['screenProps'], ({ screenProps, navigation }) => {
+    const { isMessageDataFetched, isTemplateDataFetched, setIsMessageDataFetched, setIsTemplateDataFetched } = screenProps
+    console.log('withPropsOnChange messagedata' , isMessageDataFetched, isTemplateDataFetched)
+    if(isMessageDataFetched && isTemplateDataFetched) {
+      console.log('hit')
+      setIsMessageDataFetched(false);
+      setIsTemplateDataFetched(false)
+      navigation.navigate('MessageFromTemplate');
+    }
+  }),
+)
+
+
+
+const CreateTemplateScreen = ({ screenProps }) => {
+  const { submitTemplate, template, actions, addAction, updateTemplate } = screenProps
     return (
       <View style={styles.container}>
-        <View>
-          <PhilosophizeAILogo />
-          <View style={styles.templateBuilder}>
-            <Text style={styles.templateBuilderText}>
-              Create your own using:
-            </Text>
-            <View style={styles.templateButtons}>
-              <Button light>
-                <Text style={styles.templateButtonText}>noun</Text>
-              </Button>
-              <Button light>
-                <Text style={styles.templateButtonText}>a_noun</Text>
-              </Button>
-              <Button light>
-                <Text style={styles.templateButtonText}>adjective</Text>
-              </Button>
-              <Button light>
-                <Text style={styles.templateButtonText}>an_adjective</Text>
-              </Button>
+          <ScrollView>
+            <PhilosophizeAILogo />
+            <View style={styles.templateBuilder}>
+              <Text style={styles.templateBuilderText}>
+                Create your own using:
+              </Text>
+              <View style={styles.templateButtons}>
+                {actions.map((action, index) =>(
+                  <Button light onPress={() => addAction(action)} key={index}>
+                    <Text style={styles.templateButtonText}>{action}</Text>
+                  </Button>
+                ), )}
+              </View>
             </View>
-          </View>
-          <View style={styles.templateContainer}>
-            <TextInput
-              style = {styles.templateText}
-              value={template}
-              multiline={true}
+            <View style={styles.templateContainer}>
+              <TextInput
+                style = {styles.templateText}
+                value={template}
+                multiline={true}
+                onChangeText = {(text) => updateTemplate(text)}
+              >
+              </TextInput>
+            </View>
+            <Button block success
+              onPress={submitTemplate}
             >
-            </TextInput>
-          </View>
-          <Button block success
-            onPress={submitTemplate}
-          >
-            <Text style={{color: 'white'}}>
-              Generate From Template
-            </Text>
-          </Button>
-        </View>
+              <Text style={{color: 'white'}}>
+                Generate From Template
+              </Text>
+            </Button>
+          </ScrollView>
       </View>
     );
 }
@@ -100,4 +111,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default withData(CreateTemplateScreen);
+export default enhance(CreateTemplateScreen);

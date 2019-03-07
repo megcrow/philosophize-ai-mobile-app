@@ -3,11 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
-import withData from '../../helpers/withData';
 
-const MessageFromTemplateScreen = (props) => {
-  const {isMessageLoading, loadMessage, message, templateId, navigation} = props
-  console.log('MessageFromTemplateScreen', props)
+const MessageFromTemplateScreen = ({screenProps, navigation}) => {
+  const {isMessageLoading, loadMessage, message} = screenProps
+  console.log('MessageFromTemplateScreen', screenProps)
     return (
       <View style={styles.container}>
         <View>
@@ -71,4 +70,4 @@ const styles = StyleSheet.create({
 });
 
 // export default withTemplate(MessageFromTemplateScreen);
-export default withData(MessageFromTemplateScreen);
+export default MessageFromTemplateScreen;

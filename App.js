@@ -5,7 +5,7 @@ import { AppLoading } from 'expo';
 import FooterTabNavigator from './navigation/FooterTabNavigator';
 import AppNavigator from './navigation/AppNavigator'
 
-export default function App ({isLoadingComplete, _handleFinishLoading, _handleLoadingError, _loadAssetsAsync}) {
+export default function App ({isLoadingComplete, _handleFinishLoading, _handleLoadingError, _loadAssetsAsync, ...rest}) {
   if(!isLoadingComplete) {
     return (
       <AppLoading
@@ -19,7 +19,7 @@ export default function App ({isLoadingComplete, _handleFinishLoading, _handleLo
       <View style={styles.container}>
         <StatusBar barStyle="light-content"/>
         {/* <FooterTabNavigator /> */}
-        <AppNavigator />
+        <AppNavigator screenProps={rest} />
       </View>
     );
   }

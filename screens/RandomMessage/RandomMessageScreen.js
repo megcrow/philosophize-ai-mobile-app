@@ -1,23 +1,47 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
+import { compose, withStateHandlers, withHandlers  } from 'recompose';
 
-
+import api from '../../lib/api';
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
-import withData from '../../helpers/withData';
 
-const RandomMessageScreen = ({ message, loadMessage }) => {
+const enhance = compose(
+  withStateHandlers(({
+    randomMessage: 'Press the generate message button to see a random message',
+    isRandomMessageLoading: false
+  }), ({
+    setRandomMessage: () => (payload) => ({ randomMessage: payload }),
+    setIsRandomMessageLoading: () => (payload) => ({ isRandomMessageLoading: payload})
+  })),
+  withHandlers({
+    loadRandomMessage: ({ setRandomMessage, setIsRandomMessageLoading }) => () => {
+      api.post('messages')
+          .then(({ data }) => {
+            setRandomMessage(data.body);
+            console.log('new message: ', data.body)
+            setIsRandomMessageLoading(false);
+          })
+          .catch(e => {
+            setIsRanomdMessageLoading(false);
+            console.error(e);
+          })
+    }
+  })
+);
+
+const RandomMessageScreen = ({ randomMessage, loadRandomMessage }) => {
     return (
       <View style={styles.container}>
         <View>
           <PhilosophizeAILogo />
           <View style={styles.messageContainer}>
             <Text style = {styles.message}>
-              {message}
+              {randomMessage}
             </Text>
           </View>
           <Button block success
-          onPress={loadMessage}
+          onPress={loadRandomMessage}
           >
             <Text style={{color: 'white'}}>
               Generate Message
@@ -53,5 +77,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withData(RandomMessageScreen);
+export default enhance(RandomMessageScreen);
 
