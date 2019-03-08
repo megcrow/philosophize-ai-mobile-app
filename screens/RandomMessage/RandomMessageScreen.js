@@ -5,6 +5,7 @@ import { compose, withStateHandlers, withHandlers  } from 'recompose';
 
 import api from '../../lib/api';
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
+import PhilosophizeLoader from '../../components/PhilosophizeLoader'
 
 const enhance = compose(
   withStateHandlers(({
@@ -16,6 +17,7 @@ const enhance = compose(
   })),
   withHandlers({
     loadRandomMessage: ({ setRandomMessage, setIsRandomMessageLoading }) => () => {
+      setIsRandomMessageLoading(true);
       api.post('messages')
           .then(({ data }) => {
             setRandomMessage(data.body);
@@ -30,15 +32,15 @@ const enhance = compose(
   })
 );
 
-const RandomMessageScreen = ({ randomMessage, loadRandomMessage }) => {
+const RandomMessageScreen = ({ randomMessage, loadRandomMessage, isRandomMessageLoading }) => {
     return (
       <View style={styles.container}>
         <View>
           <PhilosophizeAILogo />
           <View style={styles.messageContainer}>
-            <Text style = {styles.message}>
+            {isRandomMessageLoading? (<PhilosophizeLoader/>):(<Text style = {styles.message}>
               {randomMessage}
-            </Text>
+            </Text>)}
           </View>
           <Button block success
           onPress={loadRandomMessage}

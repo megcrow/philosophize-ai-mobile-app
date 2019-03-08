@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, FlatList, Text, View } from 'react-native';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
+import PhilosophizeLoader from '../../components/PhilosophizeLoader';
 
 export default function HistoryScreen ({ loadMessages, isLoadingMessages, generatedMessages, refreshMessages }) {
   return (
@@ -12,9 +13,7 @@ export default function HistoryScreen ({ loadMessages, isLoadingMessages, genera
       <PhilosophizeAILogo />
       {
         (isLoadingMessages || generatedMessages.length === 0) ? (
-          <Text style={styles.text}>
-            loading...
-          </Text>
+            <PhilosophizeLoader />
         ) : (
               <FlatList
                 contentContainerStyle={{marginTop: 30}}

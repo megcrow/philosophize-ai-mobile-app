@@ -1,15 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { Header } from 'react-navigation'
 import { Button } from 'native-base';
 import { compose, withPropsOnChange} from 'recompose';
 
 import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
+import PhilosophizeLoader from '../../components/PhilosophizeLoader';
 
 
 const enhance = compose(
   withPropsOnChange(['screenProps'], ({ screenProps, navigation }) => {
     const { isMessageDataFetched, isTemplateDataFetched, setIsMessageDataFetched, setIsTemplateDataFetched } = screenProps
-    console.log('withPropsOnChange messagedata' , isMessageDataFetched, isTemplateDataFetched)
     if(isMessageDataFetched && isTemplateDataFetched) {
       console.log('hit')
       setIsMessageDataFetched(false);
@@ -22,41 +23,46 @@ const enhance = compose(
 
 
 const CreateTemplateScreen = ({ screenProps }) => {
-  const { submitTemplate, template, actions, addAction, updateTemplate } = screenProps
+  const { submitTemplate, template, actions, addAction, updateTemplate, isMessageLoading, isTemplateLoading } = screenProps
     return (
-      <View style={styles.container}>
-          <ScrollView>
-            <PhilosophizeAILogo />
-            <View style={styles.templateBuilder}>
-              <Text style={styles.templateBuilderText}>
-                Create your own using:
-              </Text>
-              <View style={styles.templateButtons}>
-                {actions.map((action, index) =>(
-                  <Button light onPress={() => addAction(action)} key={index}>
-                    <Text style={styles.templateButtonText}>{action}</Text>
-                  </Button>
-                ), )}
+        (isTemplateLoading || isMessageLoading) ? (<PhilosophizeLoader/>) : (
+          <KeyboardAvoidingView style={styles.container} behavior="position" keyboardVerticalOffset = {Header.HEIGHT - 100}>
+            <ScrollView keyboardShouldPersistTaps='handled'>
+              <PhilosophizeAILogo />
+              <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}} accessible={false}>
+                <View>
+                  <View style={styles.templateBuilder}>
+                    <Text style={styles.templateBuilderText}>
+                      Create your own using:
+                    </Text>
+                    <View style={styles.templateButtons}>
+                      {actions.map((action, index) =>(
+                        <Button light onPress={() => addAction(action)} key={index}>
+                          <Text style={styles.templateButtonText}>{action}</Text>
+                        </Button>
+                      ), )}
+                    </View>
+                  </View>
+                  <View style={styles.templateContainer}>
+                    <TextInput
+                      style = {styles.templateText}
+                      value={template}
+                      multiline={true}
+                      onChangeText = {(text) => updateTemplate(text)}
+                    >
+                    </TextInput>
+                  </View>
+                <Button block success
+                  onPress={submitTemplate}
+                >
+                  <Text style={{color: 'white'}}>
+                    Generate From Template
+                  </Text>
+                </Button>
               </View>
-            </View>
-            <View style={styles.templateContainer}>
-              <TextInput
-                style = {styles.templateText}
-                value={template}
-                multiline={true}
-                onChangeText = {(text) => updateTemplate(text)}
-              >
-              </TextInput>
-            </View>
-            <Button block success
-              onPress={submitTemplate}
-            >
-              <Text style={{color: 'white'}}>
-                Generate From Template
-              </Text>
-            </Button>
+            </TouchableWithoutFeedback>
           </ScrollView>
-      </View>
+        </KeyboardAvoidingView>)
     );
 }
 
