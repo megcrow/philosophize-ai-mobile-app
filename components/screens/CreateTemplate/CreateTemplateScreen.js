@@ -4,15 +4,14 @@ import { Header } from 'react-navigation'
 import { Button } from 'native-base';
 import { compose, withPropsOnChange} from 'recompose';
 
-import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
-import PhilosophizeLoader from '../../components/PhilosophizeLoader';
+import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
+
 
 
 const enhance = compose(
   withPropsOnChange(['screenProps'], ({ screenProps, navigation }) => {
     const { isMessageDataFetched, isTemplateDataFetched, setIsMessageDataFetched, setIsTemplateDataFetched } = screenProps
     if(isMessageDataFetched && isTemplateDataFetched) {
-      console.log('hit')
       setIsMessageDataFetched(false);
       setIsTemplateDataFetched(false)
       navigation.navigate('MessageFromTemplate');
@@ -25,7 +24,7 @@ const enhance = compose(
 const CreateTemplateScreen = ({ screenProps }) => {
   const { submitTemplate, template, actions, addAction, updateTemplate, isMessageLoading, isTemplateLoading } = screenProps
     return (
-        (isTemplateLoading || isMessageLoading) ? (<PhilosophizeLoader/>) : (
+        (isTemplateLoading || isMessageLoading) ? (<PhilosophizeAILoader/>) : (
           <KeyboardAvoidingView style={styles.container} behavior="position" keyboardVerticalOffset = {Header.HEIGHT - 100}>
             <ScrollView keyboardShouldPersistTaps='handled'>
               <PhilosophizeAILogo />
@@ -118,3 +117,4 @@ const styles = StyleSheet.create({
 });
 
 export default enhance(CreateTemplateScreen);
+

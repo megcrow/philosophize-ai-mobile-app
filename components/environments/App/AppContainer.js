@@ -1,4 +1,4 @@
-import api from './lib/api';
+import api from 'lib';
 import { compose, withState, withStateHandlers, withHandlers, withPropsOnChange } from 'recompose';
 import { Font } from 'expo';
 
@@ -20,7 +20,7 @@ const enhance = compose(
     _loadAssetsAsync: ({}) => async () => {
       return Promise.all([
         Font.loadAsync({
-          'FontAwesome5FreeSolid': require('./assets/fonts/fontawesome.ttf')
+          'FontAwesome5FreeSolid': require('../../../assets/fonts/fontawesome.ttf')
         })
       ]);
     }
@@ -49,17 +49,14 @@ const enhance = compose(
 
   withHandlers({
 
-    loadMessage: ({ setMessage, setIsMessageLoading, templateId, setIsMessageDataFetched, isMessageDataFetched }) => () => {
-      console.log('loadMessage was called')
+    loadMessage: ({ setMessage, setIsMessageLoading, templateId, setIsMessageDataFetched }) => () => {
       setIsMessageLoading(true);
       if(templateId === null ){
         api.post('messages')
           .then(({ data }) => {
             setMessage(data.body);
-            console.log('new message: ', data.body)
             setIsMessageLoading(false);
             setIsMessageDataFetched(true);
-            console.log(templateId)
           })
           .catch(e => {
             setIsMessageLoading(false);
@@ -69,10 +66,8 @@ const enhance = compose(
             api.post('messages', { template_id: templateId })
               .then(({ data }) => {
                 setMessage(data.body);
-                console.log('new message: ', data.body)
                 setIsMessageLoading(false);
                 setIsMessageDataFetched(true);
-                console.log(isMessageDataFetched)
               })
               .catch(e => {
                 setIsMessageLoading(false);
@@ -92,20 +87,16 @@ const enhance = compose(
 
   withHandlers({
     addAction: ({ template, updateTemplate }) => (action) => {
-      console.log(action)
       updateTemplate(`${template} {{ ${action} }}`)
     },
 
     submitTemplate: ({ setIsTemplateLoading, template, setTemplateId, setIsTemplateDataFetched, isTemplateDataFetched}) => () => {
-      console.log('submitTemplate was called')
       setIsTemplateLoading(true);
       api.post('templates', {body: template})
         .then(resp => {
           setIsTemplateLoading(false);
           setTemplateId(resp.data.id);
-          console.log('created template!', resp.data);
           setIsTemplateDataFetched(true);
-          console.log(isTemplateDataFetched)
           return resp
         })
         .catch(e => {
@@ -120,18 +111,6 @@ const enhance = compose(
     templateId && loadMessage();
   }),
 
-  // withPropsOnChange(['isMessageDataFetched', 'isTemplateDataFetched'], ({ setIsMessageDataFetched, setIsTemplateDataFetched, isMessageDataFetched, isTemplateDataFetched, message, templateId, loadMessage, navigation }) => {
-  //   console.log('withPropsOnChange1 messagedata' ,isMessageDataFetched, isTemplateDataFetched)
-  //   if(isMessageDataFetched && isTemplateDataFetched) {
-  //     console.log('hit')
-  //     setIsMessageDataFetched(false);
-  //     setIsTemplateDataFetched(false)
-
-  //   } else {
-  //       return null
-  //     }
-  //   }
-  // ),
 );
 
 export default enhance(App)

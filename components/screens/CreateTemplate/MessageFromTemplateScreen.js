@@ -2,11 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
 
-import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
+import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';;
 
 const MessageFromTemplateScreen = ({screenProps, navigation}) => {
   const {isMessageLoading, loadMessage, message} = screenProps
-  console.log('MessageFromTemplateScreen', screenProps)
     return (
       <View style={styles.container}>
         <View>
@@ -14,9 +13,7 @@ const MessageFromTemplateScreen = ({screenProps, navigation}) => {
           <View style={styles.templateContainer}>
               {
                 (isMessageLoading) ? (
-                <Text style={styles.template}>
-                  loading....
-                </Text>
+                  <PhilosophizeAILoader />
                 ) : (
                 <Text style={styles.template}>{message}</Text>
                 )
@@ -69,5 +66,5 @@ const styles = StyleSheet.create({
 
 });
 
-// export default withTemplate(MessageFromTemplateScreen);
 export default MessageFromTemplateScreen;
+

@@ -2,10 +2,10 @@ import React from 'react';
 import { PacmanIndicator } from 'react-native-indicators';
 import { View, StyleSheet } from 'react-native';
 
-const PhilosophizeLoader = () => {
+const PhilosophizeAILoader = () => {
   return(
     <View style={styles.Loader}>
-      <PacmanIndicator color='yellow'/>
+      <PacmanIndicator color='rgb(242, 204, 67)'/>
     </View>
   )
 }
@@ -18,5 +18,5 @@ const styles = StyleSheet.create({
 
 });
 
-export default PhilosophizeLoader
+export default PhilosophizeAILoader
 

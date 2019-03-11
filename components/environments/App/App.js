@@ -1,11 +1,11 @@
 import React from 'react';
 import {  StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading } from 'expo';
+import { AppLoading, registerRootComponent } from 'expo';
 
-import FooterTabNavigator from './navigation/FooterTabNavigator';
-import AppNavigator from './navigation/AppNavigator'
+import { AppNavigator } from 'ecosystems';
 
-export default function App ({isLoadingComplete, _handleFinishLoading, _handleLoadingError, _loadAssetsAsync, ...rest}) {
+
+const App = ({isLoadingComplete, _handleFinishLoading, _handleLoadingError, _loadAssetsAsync, ...rest}) => {
   if(!isLoadingComplete) {
     return (
       <AppLoading
@@ -18,7 +18,6 @@ export default function App ({isLoadingComplete, _handleFinishLoading, _handleLo
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content"/>
-        {/* <FooterTabNavigator /> */}
         <AppNavigator screenProps={rest} />
       </View>
     );
@@ -30,3 +29,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default App;
+

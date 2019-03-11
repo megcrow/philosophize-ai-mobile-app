@@ -1,11 +1,10 @@
+import api from 'lib';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
 import { compose, withStateHandlers, withHandlers  } from 'recompose';
 
-import api from '../../lib/api';
-import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
-import PhilosophizeLoader from '../../components/PhilosophizeLoader'
+import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
 
 const enhance = compose(
   withStateHandlers(({
@@ -21,7 +20,6 @@ const enhance = compose(
       api.post('messages')
           .then(({ data }) => {
             setRandomMessage(data.body);
-            console.log('new message: ', data.body)
             setIsRandomMessageLoading(false);
           })
           .catch(e => {
@@ -38,7 +36,7 @@ const RandomMessageScreen = ({ randomMessage, loadRandomMessage, isRandomMessage
         <View>
           <PhilosophizeAILogo />
           <View style={styles.messageContainer}>
-            {isRandomMessageLoading? (<PhilosophizeLoader/>):(<Text style = {styles.message}>
+            {isRandomMessageLoading? (<PhilosophizeAILoader/>):(<Text style = {styles.message}>
               {randomMessage}
             </Text>)}
           </View>

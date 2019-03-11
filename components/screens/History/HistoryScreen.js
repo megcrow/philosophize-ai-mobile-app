@@ -1,10 +1,9 @@
 import React from 'react';
 import { StyleSheet, FlatList, Text, View } from 'react-native';
 
-import PhilosophizeAILogo from '../../components/PhilosophizeAILogo';
-import PhilosophizeLoader from '../../components/PhilosophizeLoader';
+import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
 
-export default function HistoryScreen ({ loadMessages, isLoadingMessages, generatedMessages, refreshMessages }) {
+const HistoryScreen = ({ loadMessages, isLoadingMessages, generatedMessages, refreshMessages }) => {
   return (
     <View
       style={styles.container}
@@ -13,7 +12,7 @@ export default function HistoryScreen ({ loadMessages, isLoadingMessages, genera
       <PhilosophizeAILogo />
       {
         (isLoadingMessages || generatedMessages.length === 0) ? (
-            <PhilosophizeLoader />
+            <PhilosophizeAILoader />
         ) : (
               <FlatList
                 contentContainerStyle={{marginTop: 30}}
@@ -31,6 +30,7 @@ export default function HistoryScreen ({ loadMessages, isLoadingMessages, genera
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -58,3 +58,6 @@ const styles = StyleSheet.create({
 
   }
 });
+
+export default HistoryScreen;
+

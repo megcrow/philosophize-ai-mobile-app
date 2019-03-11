@@ -1,4 +1,4 @@
-import api from '../../lib/api';
+import api from 'lib';
 import { compose, withHandlers, withState, lifecycle } from 'recompose';
 
 import HistoryScreen from './HistoryScreen';
@@ -36,3 +36,4 @@ const enhance = compose(
 )
 
 export default enhance(HistoryScreen)
+
