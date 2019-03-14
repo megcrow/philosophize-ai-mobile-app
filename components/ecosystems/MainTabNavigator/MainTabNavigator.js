@@ -1,9 +1,9 @@
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import { CreateTemplateScreen, HistoryScreenContainer, MessageFromTemplateScreen, RandomMessageScreen } from 'screens';
+import { CreateTemplateScreen, HistoryScreenContainer, MessageFromTemplateScreen, RandomMessageContainer } from 'screens';
 
 const RandomMessageStack = createStackNavigator(
-  {Home: RandomMessageScreen},
+  {Home: RandomMessageContainer},
   { headerMode: 'none' }
   );
 

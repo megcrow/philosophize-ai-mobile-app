@@ -6,42 +6,22 @@ import { compose, withStateHandlers, withHandlers  } from 'recompose';
 
 import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
 
-const enhance = compose(
-  withStateHandlers(({
-    randomMessage: 'Press the generate message button to see a random message',
-    isRandomMessageLoading: false
-  }), ({
-    setRandomMessage: () => (payload) => ({ randomMessage: payload }),
-    setIsRandomMessageLoading: () => (payload) => ({ isRandomMessageLoading: payload})
-  })),
-  withHandlers({
-    loadRandomMessage: ({ setRandomMessage, setIsRandomMessageLoading }) => () => {
-      setIsRandomMessageLoading(true);
-      api.post('messages')
-          .then(({ data }) => {
-            setRandomMessage(data.body);
-            setIsRandomMessageLoading(false);
-          })
-          .catch(e => {
-            setIsRanomdMessageLoading(false);
-            console.error(e);
-          })
-    }
-  })
-);
-
-const RandomMessageScreen = ({ randomMessage, loadRandomMessage, isRandomMessageLoading }) => {
+const RandomMessageScreen = ({ message, loadMessage, isFetching }) => {
     return (
       <View style={styles.container}>
         <View>
           <PhilosophizeAILogo />
           <View style={styles.messageContainer}>
-            {isRandomMessageLoading? (<PhilosophizeAILoader/>):(<Text style = {styles.message}>
-              {randomMessage}
-            </Text>)}
+            {
+              isFetching? (<PhilosophizeAILoader/>)
+            :(
+              message.body? (<Text style = {styles.message}>{message.body}</Text>)
+            :(<Text style = {styles.message}>{message}</Text>)
+            )
+            }
           </View>
           <Button block success
-          onPress={loadRandomMessage}
+          onPress={loadMessage}
           >
             <Text style={{color: 'white'}}>
               Generate Message
@@ -77,5 +57,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default enhance(RandomMessageScreen);
+export default RandomMessageScreen;
 

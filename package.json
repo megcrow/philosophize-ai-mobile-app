@@ -22,8 +22,11 @@
     "react-native-indicators": "^0.13.0",
     "react-native-router-flux": "^4.0.6",
     "react-navigation": "^3.3.2",
+    "react-redux": "^6.0.1",
     "react-spinners": "^0.5.3",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.3.0",
@@ -34,4 +37,3 @@
   },
   "private": true
 }
-
