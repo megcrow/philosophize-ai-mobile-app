@@ -4,13 +4,14 @@ import { AppLoading } from 'expo';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'remote-redux-devtools';
 
 import randomMessageReducer from '../../../reducers';
 import { AppNavigator } from 'ecosystems';
 
 const store = createStore(
   randomMessageReducer,
-  applyMiddleware(thunk)
+  composeWithDevTools(applyMiddleware(thunk))
 )
 
 const App = ({isLoadingComplete, _handleFinishLoading, _handleLoadingError, _loadAssetsAsync, ...rest}) => {
