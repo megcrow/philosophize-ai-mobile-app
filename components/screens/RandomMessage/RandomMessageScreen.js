@@ -2,11 +2,11 @@ import api from 'lib';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
-import { compose, withStateHandlers, withHandlers  } from 'recompose';
-
 import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
 
-const RandomMessageScreen = ({ message, loadMessage, isFetching }) => {
+const RandomMessageScreen = (props) => {
+  const { randomMessage, fetchMessage, isFetching } = props
+  const { message } = randomMessage
     return (
       <View style={styles.container}>
         <View>
@@ -21,7 +21,7 @@ const RandomMessageScreen = ({ message, loadMessage, isFetching }) => {
             }
           </View>
           <Button block success
-          onPress={loadMessage}
+          onPress={fetchMessage}
           >
             <Text style={{color: 'white'}}>
               Generate Message

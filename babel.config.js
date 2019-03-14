@@ -13,6 +13,8 @@ module.exports = function(api) {
             "helpers": "./helpers",
             "lib": "./lib",
             "screens": "./components/screens",
+            "actions": "./actions",
+            "reducers": "./reducers",
           },
         },
       ],

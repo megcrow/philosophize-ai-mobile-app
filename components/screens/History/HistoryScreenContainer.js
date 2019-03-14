@@ -1,39 +1,15 @@
-import api from 'lib';
-import { compose, withHandlers, withState, lifecycle } from 'recompose';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import HistoryScreen from'./HistoryScreen'
+import * as actions from 'actions';
 
-import HistoryScreen from './HistoryScreen';
+const mapStateToProps = (state) => {
+  return state
+}
 
-const enhance = compose(
-  withState('generatedMessages', 'setGeneratedMessages', []),
-  withState('isLoadingMessages', 'setIsLoadingMessages', false),
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actions, dispatch)
+}
 
-  withHandlers({
-    loadMessages: ({ setGeneratedMessages, setIsLoadingMessages }) => async () => {
-      try {
-        setIsLoadingMessages(true);
-        const response = await api.get('messages');
-        setGeneratedMessages(response.data);
-        setIsLoadingMessages(false)
-      } catch(e) {
-        setIsLoadingMessages(false);
-        console.error(e);
-      }
-    },
-  }),
-
-  withHandlers({
-    refreshMessages: ({setGeneratedMessages, setIsLoadingMessages, loadMessages}) => () => {
-      setGeneratedMessages([]);
-      loadMessages();
-  }
-  }),
-
-  lifecycle({
-    componentDidMount() {
-      this.props.loadMessages();
-    }
-  })
-)
-
-export default enhance(HistoryScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(HistoryScreen)
 

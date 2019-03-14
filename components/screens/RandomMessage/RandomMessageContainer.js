@@ -1,35 +1,16 @@
-import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import RandomMessageScreen from './RandomMessageScreen'
+import * as actions from 'actions';
 
-import { fetchMessage } from '../../../actions';
-import RandomMessageScreen from './RandomMessageScreen';
-
-class RandomMessageContainer extends React.Component {
-  loadMessage = () => {
-    const { dispatch } = this.props
-    dispatch(fetchMessage())
-  }
-
-  render() {
-    const { isFetching, message } = this.props
-    return (
-      <RandomMessageScreen
-      loadMessage={this.loadMessage}
-      isFetching={isFetching}
-      message={message}
-      />
-    )
-  }
+const mapStateToProps = (state) => {
+  return state
 }
 
-const mapStateToProps = state => {
-  const { randomMessageReducer, message, isFetching } = state;
-  return {
-    randomMessageReducer,
-    message,
-    isFetching
-  }
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actions, dispatch)
 }
 
-export default connect(mapStateToProps)(RandomMessageContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(RandomMessageScreen)
+
 

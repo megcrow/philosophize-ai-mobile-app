@@ -3,34 +3,41 @@ import { StyleSheet, FlatList, Text, View } from 'react-native';
 
 import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
 
-const HistoryScreen = ({ loadMessages, isLoadingMessages, generatedMessages, refreshMessages }) => {
-  return (
-    <View
-      style={styles.container}
-      onFocus={loadMessages}
-    >
-      <PhilosophizeAILogo />
-      {
-        (isLoadingMessages || generatedMessages.length === 0) ? (
-            <PhilosophizeAILoader />
-        ) : (
-              <FlatList
-                contentContainerStyle={{marginTop: 30}}
-                data={generatedMessages}
-                refreshing={isLoadingMessages}
-                onRefresh={refreshMessages}
-                renderItem={({ item })=>
-                    <View style={styles.messagesContainer}><Text style={styles.text}>{item.body}</Text></View>
-              }
-                keyExtractor={item => item.id}
-              >
-              </FlatList>
-        )
-      }
-    </View>
-  );
+class  HistoryScreen extends React.Component {
+  componentDidMount() {
+    console.log('component mounted')
+    const { fetchMessageHistory } = this.props
+    fetchMessageHistory()
+  }
+  render (){
+    const { messageHistory, fetchMessageHistory } = this.props
+    const { history, isFetching } = messageHistory
+    return (
+      <View
+        style={styles.container}
+        onFocus={fetchMessageHistory}
+      >
+        <PhilosophizeAILogo />
+        {
+          (isFetching) ? (
+              <PhilosophizeAILoader />
+          ) : (
+                <FlatList
+                  contentContainerStyle={{marginTop: 30}}
+                  data={history}
+                  refreshing={isFetching}
+                  onRefresh={fetchMessageHistory}
+                  renderItem={({ item })=>
+                      <View style={styles.messagesContainer}><Text style={styles.text}>{item.body}</Text></View>
+                }
+                  keyExtractor={item => item.id}
+                >
+                </FlatList>
+          )}
+      </View>
+    );
+  }
 }
-
 
 const styles = StyleSheet.create({
   container: {
