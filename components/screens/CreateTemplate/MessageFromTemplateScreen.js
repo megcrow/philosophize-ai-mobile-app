@@ -2,42 +2,45 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
 
-import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';;
+import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
 
-const MessageFromTemplateScreen = ({screenProps, navigation}) => {
-  const {isMessageLoading, loadMessage, message} = screenProps
-    return (
-      <View style={styles.container}>
-        <View>
-          <PhilosophizeAILogo />
-          <View style={styles.templateContainer}>
-              {
-                (isMessageLoading) ? (
-                  <PhilosophizeAILoader />
-                ) : (
-                <Text style={styles.template}>{message}</Text>
-                )
-              }
-          </View>
-          <Button block success onPress={loadMessage}>
-            <Text
-              style={{color: 'white'}}
-            >
-              Generate from Template
-            </Text>
-          </Button>
-          <View style={{paddingTop: 30}}>
-            <Button block success
-              onPress={()=> navigation.navigate('CreateTemplate')}
-            >
-              <Text style={{color: 'white'}}>
-                Make New Template
+ class MessageFromTemplateScreen extends React.Component  {
+   render(){
+    const { navigation, fetchMessageById, randomMessageById, submitTemplateReducer} = this.props
+    const { isFetching, messageById } = randomMessageById
+    const { templateId } = submitTemplateReducer
+      return (
+        <View style={styles.container}>
+          <View>
+            <PhilosophizeAILogo />
+            <View style={styles.templateContainer}>
+                {
+                  (isFetching || !messageById) ? (
+                    <PhilosophizeAILoader />
+                  ) : (
+                  <Text style={styles.template}>{messageById.body}</Text>
+                  )
+                }
+            </View>
+            <Button block success onPress={() => {fetchMessageById(templateId)}}>
+              <Text
+                style={{color: 'white'}}
+              >
+                Generate from Template
               </Text>
             </Button>
+            <View style={{paddingTop: 30}}>
+              <Button block success
+                onPress={()=> navigation.navigate('CreateTemplate')}
+              >
+                <Text style={{color: 'white'}}>
+                  Make New Template
+                </Text>
+              </Button>
+            </View>
           </View>
         </View>
-      </View>
-    );
+    )}
 }
 
 const styles = StyleSheet.create({

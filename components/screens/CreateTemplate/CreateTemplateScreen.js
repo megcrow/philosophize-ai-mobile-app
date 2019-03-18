@@ -2,29 +2,18 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { Header } from 'react-navigation'
 import { Button } from 'native-base';
-import { compose, withPropsOnChange} from 'recompose';
 
 import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
 
+const CreateTemplateScreen = (props) => {
 
+  const actions = ['noun', 'a_noun', 'adjective', 'an_adjective']
+  const { navigation, submitTemplate, submitTemplateReducer, updateTemplate, addAction, updateTemplateAction} = props
+  const { isFetching } = submitTemplateReducer
+  const { template } = updateTemplate
 
-const enhance = compose(
-  withPropsOnChange(['screenProps'], ({ screenProps, navigation }) => {
-    const { isMessageDataFetched, isTemplateDataFetched, setIsMessageDataFetched, setIsTemplateDataFetched } = screenProps
-    if(isMessageDataFetched && isTemplateDataFetched) {
-      setIsMessageDataFetched(false);
-      setIsTemplateDataFetched(false)
-      navigation.navigate('MessageFromTemplate');
-    }
-  }),
-)
-
-
-
-const CreateTemplateScreen = ({ screenProps }) => {
-  const { submitTemplate, template, actions, addAction, updateTemplate, isMessageLoading, isTemplateLoading } = screenProps
     return (
-        (isTemplateLoading || isMessageLoading) ? (<PhilosophizeAILoader/>) : (
+        (isFetching) ? (<PhilosophizeAILoader/>) : (
           <KeyboardAvoidingView style={styles.container} behavior="position" keyboardVerticalOffset = {Header.HEIGHT - 100}>
             <ScrollView keyboardShouldPersistTaps='handled'>
               <PhilosophizeAILogo />
@@ -36,8 +25,8 @@ const CreateTemplateScreen = ({ screenProps }) => {
                     </Text>
                     <View style={styles.templateButtons}>
                       {actions.map((action, index) =>(
-                        <Button light onPress={() => addAction(action)} key={index}>
-                          <Text style={styles.templateButtonText}>{action}</Text>
+                        <Button light onPress={() => { addAction(template, action)}} key={index}>
+                          <Text style={styles.templateButtonText} >{action}</Text>
                         </Button>
                       ), )}
                     </View>
@@ -47,12 +36,15 @@ const CreateTemplateScreen = ({ screenProps }) => {
                       style = {styles.templateText}
                       value={template}
                       multiline={true}
-                      onChangeText = {(text) => updateTemplate(text)}
+                      onChangeText = {(text) => updateTemplateAction(text) }
                     >
                     </TextInput>
                   </View>
                 <Button block success
-                  onPress={submitTemplate}
+                  onPress={() => {
+                    submitTemplate(template)
+                    navigation.navigate('MessageFromTemplate')
+                  }}
                 >
                   <Text style={{color: 'white'}}>
                     Generate From Template
@@ -116,5 +108,5 @@ const styles = StyleSheet.create({
 
 });
 
-export default enhance(CreateTemplateScreen);
+export default CreateTemplateScreen;
 

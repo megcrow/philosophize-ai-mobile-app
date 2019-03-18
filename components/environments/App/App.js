@@ -20,7 +20,7 @@ const App = ({isLoadingComplete, _handleFinishLoading, _handleLoadingError, _loa
       <Provider store={store}>
         <View style={styles.container}>
           <StatusBar barStyle="light-content"/>
-          <AppNavigator screenProps={rest} />
+          <AppNavigator />
         </View>
       </Provider>
     );

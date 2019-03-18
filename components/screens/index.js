@@ -1,12 +1,12 @@
-import CreateTemplateScreen from './CreateTemplate/CreateTemplateScreen';
+import CreateTemplateContainer from './CreateTemplate/CreateTemplateContainer';
 import HistoryScreenContainer from './History/HistoryScreenContainer';
-import MessageFromTemplateScreen from './CreateTemplate/MessageFromTemplateScreen';
+import MessageFromTemplateContainer from './CreateTemplate/MessageFromTemplateContainer';
 import RandomMessageContainer from './RandomMessage/RandomMessageContainer';
 
 export {
-  CreateTemplateScreen,
+  CreateTemplateContainer,
   HistoryScreenContainer,
-  MessageFromTemplateScreen,
+  MessageFromTemplateContainer,
   RandomMessageContainer
 }
 

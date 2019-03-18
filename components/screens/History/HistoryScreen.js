@@ -5,7 +5,6 @@ import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
 
 class  HistoryScreen extends React.Component {
   componentDidMount() {
-    console.log('component mounted')
     const { fetchMessageHistory } = this.props
     fetchMessageHistory()
   }
