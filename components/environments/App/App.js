@@ -5,6 +5,7 @@ import { AppLoading } from 'expo';
 import { Provider } from 'react-redux';
 
 import { AppNavigator } from 'ecosystems';
+import { PhilosophizeAILoader } from 'atoms';
 
 const App = ({isLoadingComplete, _handleFinishLoading, _handleLoadingError, _loadAssetsAsync, ...rest}) => {
   if(!isLoadingComplete) {
@@ -16,6 +17,7 @@ const App = ({isLoadingComplete, _handleFinishLoading, _handleLoadingError, _loa
           onError ={_handleLoadingError}
           onFinish ={_handleFinishLoading}
         />
+        <PhilosophizeAILoader />
       </View>
     );
   } else {
