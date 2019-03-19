@@ -15,6 +15,7 @@ module.exports = function(api) {
             "screens": "./components/screens",
             "actions": "./actions",
             "reducers": "./reducers",
+            "constants": "./constants"
           },
         },
       ],

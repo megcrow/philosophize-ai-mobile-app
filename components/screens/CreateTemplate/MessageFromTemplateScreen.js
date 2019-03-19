@@ -24,7 +24,7 @@ import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
             </View>
             <Button block success onPress={() => {fetchMessageById(templateId)}}>
               <Text
-                style={{color: 'white'}}
+                style={{color: 'white', fontSize:17}}
               >
                 Generate from Template
               </Text>
@@ -33,7 +33,7 @@ import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
               <Button block success
                 onPress={()=> navigation.navigate('CreateTemplate')}
               >
-                <Text style={{color: 'white'}}>
+                <Text style={{color: 'white', fontSize:17}}>
                   Make New Template
                 </Text>
               </Button>

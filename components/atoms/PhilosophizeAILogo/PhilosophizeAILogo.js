@@ -7,7 +7,7 @@ const PhilosophizeAILogo = () => {
   return (
     <View style={styles.position}>
       <Text style={styles.header}>
-        philosophize.ai
+        Philosophize
         &nbsp;
         <FontAwesome style={styles.icon}>
           {Icons.undo}
@@ -25,8 +25,10 @@ const styles = StyleSheet.create({
 
   header: {
     color: 'white',
-    fontSize : 38,
-    fontWeight: '500'
+    fontSize : 48,
+    fontWeight: '500',
+    fontFamily: 'PhilosophyScript',
+    paddingBottom: 4
   },
   icon: {
     color : '#28a745',

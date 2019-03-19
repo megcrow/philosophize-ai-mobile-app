@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#282c34',
   },
   messagesContainer: {
-    backgroundColor: 'rgba(255, 255, 255, .5)',
+    backgroundColor: 'white',
     marginBottom: 5,
     borderRadius: 20,
     borderColor: 'rgba(255, 255, 255, 0.5)',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     marginBottom: 5,
     fontFamily: 'Menlo',
-    color: 'white',
+    color: '#8f8f8f',
     borderColor: 'black',
     padding: 10
 

@@ -9,11 +9,14 @@ import { AppNavigator } from 'ecosystems';
 const App = ({isLoadingComplete, _handleFinishLoading, _handleLoadingError, _loadAssetsAsync, ...rest}) => {
   if(!isLoadingComplete) {
     return (
-      <AppLoading
-        startAsync={_loadAssetsAsync}
-        onError ={_handleLoadingError}
-        onFinish ={_handleFinishLoading}
-      />
+      <View>
+        <StatusBar barStyle="light-content"/>
+        <AppLoading
+          startAsync={_loadAssetsAsync}
+          onError ={_handleLoadingError}
+          onFinish ={_handleFinishLoading}
+        />
+      </View>
     );
   } else {
     return (

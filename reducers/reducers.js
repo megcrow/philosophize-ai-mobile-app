@@ -1,11 +1,12 @@
+import { generatePhrases }  from 'constants';
 
   const defaultState = {
     isFetching: false,
-    message: 'Press the generate message button to see a random message',
+    message: 'Press the button to see a random message',
     template:'This sentence has {{ a_noun }} and {{ an_adjective }} {{ noun }} in it.',
     templateId: null,
     messageById: null,
-    history: []
+    history: [],
   }
 
   export const randomMessage = (state = defaultState, action) => {

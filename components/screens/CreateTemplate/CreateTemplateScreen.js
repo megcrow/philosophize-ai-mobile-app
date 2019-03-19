@@ -46,7 +46,7 @@ const CreateTemplateScreen = (props) => {
                     navigation.navigate('MessageFromTemplate')
                   }}
                 >
-                  <Text style={{color: 'white'}}>
+                  <Text style={{color: 'white', fontSize:17}}>
                     Generate From Template
                   </Text>
                 </Button>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   templateBuilder: {
     marginTop: 70,
-    backgroundColor: '#17a2b8',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     width: 350,
     height: 100,
     borderRadius: 10

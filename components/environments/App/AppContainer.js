@@ -19,7 +19,8 @@ const enhance = compose(
     _loadAssetsAsync: ({}) => async () => {
       return Promise.all([
         Font.loadAsync({
-          'FontAwesome5FreeSolid': require('../../../assets/fonts/fontawesome.ttf')
+          'FontAwesome5FreeSolid': require('../../../assets/fonts/fontawesome.ttf'),
+          'PhilosophyScript': require('../../../assets/fonts/philosophyscript.ttf')
         })
       ]);
     }
