@@ -4,41 +4,44 @@ import { Button } from 'native-base';
 
 
 import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
-import { generatePhrases }  from 'constants';
+import { generatePhrases, Layout, width }  from 'constants';
 
+let generatePhrase = () => generatePhrases[Math.floor(Math.random()*(generatePhrases.length))]
 class RandomMessageScreen extends React.Component {
   constructor(props){
     super(props)
-    this.state = { generatePhrase: generatePhrases[Math.floor(Math.random()*(generatePhrases.length))]}
+    this.state = { generatePhrase: generatePhrase()}
   }
 
   handlePress = () => {
-    this.setState({ generatePhrase: generatePhrases[Math.floor(Math.random()*(generatePhrases.length))]});
+    this.setState({ generatePhrase: generatePhrase()});
     this.props.fetchMessage();
   }
     render(){
       const { randomMessage, isFetching } = this.props
       const { message } = randomMessage
       return (
-        <View style={styles.container}>
-          <View>
-            <PhilosophizeAILogo />
-            <View style={styles.messageContainer}>
-              {
-                isFetching? (<PhilosophizeAILoader/>)
-              :(
-                message.body? (<Text style = {styles.message}>{message.body}</Text>)
-              :(<Text style = {styles.message}>{message}</Text>)
-              )
-              }
+        <View style={Layout.container}>
+            <View style={Layout.logo}>
+              <PhilosophizeAILogo />
             </View>
-            <Button block success
-            onPress={this.handlePress}
-            >
-              <Text style={{color: 'white', fontSize:17}}>
-                {this.state.generatePhrase}
-              </Text>
-            </Button>
+            <View style={Layout.screenContent}>
+              <View style={styles.messageContainer}>
+                {
+                  isFetching? (<PhilosophizeAILoader/>)
+                :(
+                  message.body? (<Text style = {styles.message}>{message.body}</Text>)
+                :(<Text style = {styles.message}>{message}</Text>)
+                )
+                }
+              </View>
+              <Button block success
+              onPress={this.handlePress}
+              >
+                <Text style={{color: 'white', fontSize:17}}>
+                  {this.state.generatePhrase}
+                </Text>
+              </Button>
           </View>
         </View>
       )
@@ -46,23 +49,17 @@ class RandomMessageScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#282c34',
-  },
 
   messageContainer: {
+    flexGrow: 0.2,
     alignItems: 'center',
-    marginTop: 36,
-    marginBottom: 98,
-    padding: 5,
+    padding: 10,
     borderRadius: 20,
     borderColor: 'rgba(255, 255, 255, 0.5)',
     backgroundColor: 'white',
     overflow: 'hidden',
-    width: 320,
-    height: 117,
+    width: width * .9,
+    minHeight: 117,
     justifyContent: 'center'
   },
 

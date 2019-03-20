@@ -4,6 +4,7 @@ import { Header } from 'react-navigation'
 import { Button } from 'native-base';
 
 import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
+import { Colors, Layout, width, height } from 'constants'
 
 const CreateTemplateScreen = (props) => {
 
@@ -14,44 +15,46 @@ const CreateTemplateScreen = (props) => {
 
     return (
         (isFetching) ? (<PhilosophizeAILoader/>) : (
-          <KeyboardAvoidingView style={styles.container} behavior="position" keyboardVerticalOffset = {Header.HEIGHT - 100}>
+          <KeyboardAvoidingView contentContainerStyle={styles.container} behavior="position" keyboardVerticalOffset = {Header.HEIGHT - 200}>
             <ScrollView keyboardShouldPersistTaps='handled'>
-              <PhilosophizeAILogo />
-              <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}} accessible={false}>
-                <View>
-                  <View style={styles.templateBuilder}>
-                    <Text style={styles.templateBuilderText}>
-                      Create your own using:
-                    </Text>
-                    <View style={styles.templateButtons}>
-                      {actions.map((action, index) =>(
-                        <Button light onPress={() => { addAction(template, action)}} key={index}>
-                          <Text style={styles.templateButtonText} >{action}</Text>
-                        </Button>
-                      ), )}
+                <View style={Layout.logo}>
+                  <PhilosophizeAILogo />
+                </View>
+                <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}} accessible={false}>
+                  <View style={Layout.screenContent}>
+                    <View style={styles.templateBuilder}>
+                      <Text style={styles.templateBuilderText}>
+                        Create your own using:
+                      </Text>
+                      <View style={styles.templateButtons}>
+                        {actions.map((action, index) =>(
+                          <Button light onPress={() => { addAction(template, action)}} key={index}>
+                            <Text style={styles.templateButtonText} >{action}</Text>
+                          </Button>
+                        ), )}
+                      </View>
                     </View>
-                  </View>
-                  <View style={styles.templateContainer}>
-                    <TextInput
-                      style = {styles.templateText}
-                      value={template}
-                      multiline={true}
-                      onChangeText = {(text) => updateTemplateAction(text) }
-                    >
-                    </TextInput>
-                  </View>
-                <Button block success
-                  onPress={() => {
-                    submitTemplate(template)
-                    navigation.navigate('MessageFromTemplate')
-                  }}
-                >
-                  <Text style={{color: 'white', fontSize:17}}>
-                    Generate From Template
-                  </Text>
-                </Button>
-              </View>
-            </TouchableWithoutFeedback>
+                    <View style={styles.templateContainer}>
+                      <TextInput
+                        style = {styles.templateText}
+                        value={template}
+                        multiline={true}
+                        onChangeText = {(text) => updateTemplateAction(text) }
+                      >
+                      </TextInput>
+                    </View>
+                  <Button block success
+                    onPress={() => {
+                      submitTemplate(template)
+                      navigation.navigate('MessageFromTemplate')
+                    }}
+                  >
+                    <Text style={{color: 'white', fontSize:17}}>
+                      Generate From Template
+                    </Text>
+                  </Button>
+                </View>
+              </TouchableWithoutFeedback>
           </ScrollView>
         </KeyboardAvoidingView>)
     );
@@ -59,16 +62,16 @@ const CreateTemplateScreen = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#282c34',
+    paddingLeft: width*0.05,
+    backgroundColor: Colors.backgroundColor,
+    height: height
   },
   templateBuilder: {
-    marginTop: 70,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    width: 350,
-    height: 100,
-    borderRadius: 10
+    width: width * 0.9,
+    borderRadius: 10,
+    paddingBottom: 20,
+    marginBottom: 20
   },
 
   templateBuilderText: {
@@ -91,14 +94,15 @@ const styles = StyleSheet.create({
 
   templateContainer: {
     alignItems: 'center',
-    marginTop: 25,
-    marginBottom: 25,
+    justifyContent: 'center',
     padding: 20,
     borderRadius: 20,
     borderColor: 'rgba(255, 255, 255, 0.5)',
     backgroundColor: 'white',
     overflow: 'hidden',
-    width: 350
+    minHeight: 100,
+    width: width*0.9,
+    marginBottom: 20
   },
 
   templateText: {

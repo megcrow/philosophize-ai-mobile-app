@@ -14,3 +14,4 @@ export default createAppContainer(createSwitchNavigator(
   initialRouteName: 'CheckIsFirstLaunch'
 }
 ));
+

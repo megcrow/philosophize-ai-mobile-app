@@ -2,6 +2,7 @@ import React from 'react'
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { height } from 'constants';
 
 const PhilosophizeAILogo = () => {
   return (
@@ -19,20 +20,20 @@ const PhilosophizeAILogo = () => {
 const styles = StyleSheet.create({
 
   position: {
-    marginTop: 107,
     alignItems: 'center',
   },
 
   header: {
     color: 'white',
-    fontSize : 48,
+    fontSize : height*0.07,
     fontWeight: '500',
     fontFamily: 'PhilosophyScript',
-    paddingBottom: 4
+    paddingBottom: 10,
+    paddingLeft: 10
   },
   icon: {
     color : '#28a745',
-    fontSize: 28
+    fontSize : height*0.04
   }
 })
 
