@@ -2,49 +2,57 @@ import React from 'react';
 import { StyleSheet, FlatList, Text, View } from 'react-native';
 
 import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
+import { Layout, width } from 'constants';
 
-const HistoryScreen = ({ loadMessages, isLoadingMessages, generatedMessages, refreshMessages }) => {
-  return (
-    <View
-      style={styles.container}
-      onFocus={loadMessages}
-    >
-      <PhilosophizeAILogo />
-      {
-        (isLoadingMessages || generatedMessages.length === 0) ? (
-            <PhilosophizeAILoader />
-        ) : (
-              <FlatList
-                contentContainerStyle={{marginTop: 30}}
-                data={generatedMessages}
-                refreshing={isLoadingMessages}
-                onRefresh={refreshMessages}
-                renderItem={({ item })=>
-                    <View style={styles.messagesContainer}><Text style={styles.text}>{item.body}</Text></View>
-              }
-                keyExtractor={item => item.id}
-              >
-              </FlatList>
-        )
-      }
-    </View>
-  );
+class  HistoryScreen extends React.Component {
+  componentDidMount() {
+    const { fetchMessageHistory } = this.props
+    fetchMessageHistory()
+  }
+  render (){
+    const { messageHistory, fetchMessageHistory } = this.props
+    const { history, isFetching } = messageHistory
+    return (
+      <View
+        style={Layout.container}
+        onFocus={fetchMessageHistory}
+      >
+        <View style={Layout.logo}>
+          <PhilosophizeAILogo />
+        </View>
+        <View style={Layout.screenContent}
+        >
+          {
+            (isFetching) ? (
+                <PhilosophizeAILoader />
+            ) : (
+                  <FlatList
+                    contentContainerStyle={{marginTop: 30}}
+                    data={history}
+                    refreshing={isFetching}
+                    onRefresh={fetchMessageHistory}
+                    renderItem={({ item })=>
+                        <View style={styles.messagesContainer}><Text style={styles.text}>{item.body}</Text></View>
+                  }
+                    keyExtractor={item => item.id}
+                  >
+                  </FlatList>
+            )}
+        </View>
+      </View>
+    );
+  }
 }
 
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#282c34',
-  },
+
   messagesContainer: {
-    backgroundColor: 'rgba(255, 255, 255, .5)',
+    backgroundColor: 'white',
     marginBottom: 5,
     borderRadius: 20,
     borderColor: 'rgba(255, 255, 255, 0.5)',
     overflow: 'hidden',
-    width: 350
+    width: width* .9
 
   },
   text: {
@@ -52,7 +60,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     marginBottom: 5,
     fontFamily: 'Menlo',
-    color: 'white',
+    color: '#8f8f8f',
     borderColor: 'black',
     padding: 10
 

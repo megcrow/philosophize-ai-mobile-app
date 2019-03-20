@@ -1,1 +1,3 @@
-export { default } from './withScreenProps';
+import withScreenProps from './withScreenProps';
+
+export default withScreenProps;

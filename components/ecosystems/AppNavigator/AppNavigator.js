@@ -1,9 +1,17 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
+import CheckIsFirstLaunchScreen from '../CheckIsFirstLaunch/CheckIsFirstLaunchScreen';
 import MainTabNavigator from '../MainTabNavigator/MainTabNavigator';
+import { WalkthroughSwiper } from 'screens';
 
-export default createAppContainer(createSwitchNavigator({
-  // You could add another route here for authentication.
-  // Read more at https://reactnavigation.org/docs/en/auth-flow.html
+export default createAppContainer(createSwitchNavigator(
+  {
+  CheckIsFirstLaunch: CheckIsFirstLaunchScreen,
   Main: MainTabNavigator,
-}));
+  Walkthrough: WalkthroughSwiper
+},
+{
+  initialRouteName: 'CheckIsFirstLaunch'
+}
+));
+

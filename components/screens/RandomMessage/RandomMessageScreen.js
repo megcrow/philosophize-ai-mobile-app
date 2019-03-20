@@ -1,81 +1,73 @@
-import api from 'lib';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'native-base';
-import { compose, withStateHandlers, withHandlers  } from 'recompose';
+
 
 import { PhilosophizeAILoader, PhilosophizeAILogo } from 'atoms';
+import { generatePhrases, Layout, width }  from 'constants';
 
-const enhance = compose(
-  withStateHandlers(({
-    randomMessage: 'Press the generate message button to see a random message',
-    isRandomMessageLoading: false
-  }), ({
-    setRandomMessage: () => (payload) => ({ randomMessage: payload }),
-    setIsRandomMessageLoading: () => (payload) => ({ isRandomMessageLoading: payload})
-  })),
-  withHandlers({
-    loadRandomMessage: ({ setRandomMessage, setIsRandomMessageLoading }) => () => {
-      setIsRandomMessageLoading(true);
-      api.post('messages')
-          .then(({ data }) => {
-            setRandomMessage(data.body);
-            setIsRandomMessageLoading(false);
-          })
-          .catch(e => {
-            setIsRanomdMessageLoading(false);
-            console.error(e);
-          })
-    }
-  })
-);
+let generatePhrase = () => generatePhrases[Math.floor(Math.random()*(generatePhrases.length))]
+class RandomMessageScreen extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = { generatePhrase: generatePhrase()}
+  }
 
-const RandomMessageScreen = ({ randomMessage, loadRandomMessage, isRandomMessageLoading }) => {
-    return (
-      <View style={styles.container}>
-        <View>
-          <PhilosophizeAILogo />
-          <View style={styles.messageContainer}>
-            {isRandomMessageLoading? (<PhilosophizeAILoader/>):(<Text style = {styles.message}>
-              {randomMessage}
-            </Text>)}
+  handlePress = () => {
+    this.setState({ generatePhrase: generatePhrase()});
+    this.props.fetchMessage();
+  }
+    render(){
+      const { randomMessage, isFetching } = this.props
+      const { message } = randomMessage
+      return (
+        <View style={Layout.container}>
+            <View style={Layout.logo}>
+              <PhilosophizeAILogo />
+            </View>
+            <View style={Layout.screenContent}>
+              <View style={styles.messageContainer}>
+                {
+                  isFetching? (<PhilosophizeAILoader/>)
+                :(
+                  message.body? (<Text style = {styles.message}>{message.body}</Text>)
+                :(<Text style = {styles.message}>{message}</Text>)
+                )
+                }
+              </View>
+              <Button block success
+              onPress={this.handlePress}
+              >
+                <Text style={{color: 'white', fontSize:17}}>
+                  {this.state.generatePhrase}
+                </Text>
+              </Button>
           </View>
-          <Button block success
-          onPress={loadRandomMessage}
-          >
-            <Text style={{color: 'white'}}>
-              Generate Message
-            </Text>
-          </Button>
         </View>
-      </View>
-    );
+      )
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#282c34',
-  },
 
   messageContainer: {
+    flexGrow: 0.2,
     alignItems: 'center',
-    marginTop: 100,
-    marginBottom: 25,
-    padding: 20,
+    padding: 10,
     borderRadius: 20,
     borderColor: 'rgba(255, 255, 255, 0.5)',
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: 'white',
     overflow: 'hidden',
-    width: 350
+    width: width * .9,
+    minHeight: 117,
+    justifyContent: 'center'
   },
 
   message: {
     fontFamily: 'Menlo',
-    color: 'white'
+    color: 'rgb( 143, 143, 143)',
   }
 });
 
-export default enhance(RandomMessageScreen);
+export default RandomMessageScreen;
 

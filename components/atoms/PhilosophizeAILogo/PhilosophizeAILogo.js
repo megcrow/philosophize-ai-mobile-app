@@ -2,12 +2,13 @@ import React from 'react'
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { height } from 'constants';
 
 const PhilosophizeAILogo = () => {
   return (
     <View style={styles.position}>
       <Text style={styles.header}>
-        philosophize.ai
+        Philosophize
         &nbsp;
         <FontAwesome style={styles.icon}>
           {Icons.undo}
@@ -19,18 +20,20 @@ const PhilosophizeAILogo = () => {
 const styles = StyleSheet.create({
 
   position: {
-    marginTop: 107,
     alignItems: 'center',
   },
 
   header: {
     color: 'white',
-    fontSize : 38,
-    fontWeight: '500'
+    fontSize : height*0.07,
+    fontWeight: '500',
+    fontFamily: 'PhilosophyScript',
+    paddingBottom: 10,
+    paddingLeft: 10
   },
   icon: {
     color : '#28a745',
-    fontSize: 28
+    fontSize : height*0.04
   }
 })
 
