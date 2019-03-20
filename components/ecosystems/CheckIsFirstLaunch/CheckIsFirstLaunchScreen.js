@@ -19,7 +19,7 @@ export default class CheckIsFirstLaunchScreen extends React.Component {
     const isFirstLaunch = await checkIfFirstLaunch();
     this.setState({ isFirstLaunch, hasCheckedAsyncStorage: true});
     this.state.hasCheckedAsyncStorage ? (
-    this.props.navigation.navigate(this.state.isFirstLaunch ? 'Main' : 'Walkthrough'))
+    this.props.navigation.navigate(this.state.isFirstLaunch ? 'Walkthrough' : 'Main'))
     : (null)
   }
 
