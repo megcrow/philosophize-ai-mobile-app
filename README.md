@@ -2,7 +2,7 @@
 
 ## About
 
-PhilosophizeAI is a React Native app based on cmr1's [PhilosophizeAI web app](https://github.com/cmr1/philosophize-ai). The philosophize bot generates randomly insightful messages based on templates built and supplied to it by the user.
+PhilosophizeAI is a React Native app based on cmr1's [PhilosophizeAI web app](https://github.com/cmr1/philosophize-ai). The PhilosophizeAI bot generates randomly insightful messages based on templates built and supplied to it by the user.
 
 ## How to use
 To test this app on your mobile device, install the mobile [Expo](https://expo.io/) app.
