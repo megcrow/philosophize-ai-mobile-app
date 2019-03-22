@@ -1,5 +1,5 @@
 import React from 'react'
-import FontAwesome, { Icons } from 'react-native-fontawesome';
+import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { height } from 'constants';
@@ -10,8 +10,7 @@ const PhilosophizeAILogo = () => {
       <Text style={styles.header}>
         Philosophize
         &nbsp;
-        <FontAwesome style={styles.icon}>
-          {Icons.undo}
+        <FontAwesome name = "undo" style={styles.icon}>
         </FontAwesome>
       </Text>
     </View>
